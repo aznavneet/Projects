@@ -32,12 +32,18 @@ jobs:
 
       - name: setup docker buildx
         uses: docker/setup-buildx-action@v3
+        with:
+          context: ./docker/python-web-app/
+
+      - name: List files in context
+        run: |
+          ls -la ./docker/python-web-app
         
 
       - name: Build and push
-        uses: docker/build-push-action@v6
+        uses: docker/build-push-action@v3
         with:
-          context: docker/python-web-app/Dockerfile
-          file: Dockerfile
+          context: ./docker/python-web-app
+          dockerfile: random.Dockerfile
           push: true
           tags: practise
